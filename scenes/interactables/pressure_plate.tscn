@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/pressure_plate.gd" id="1_plate"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plate"]
+size = Vector2(112, 20)
+
+[node name="PressurePlate" type="Area2D"]
+script = ExtResource("1_plate")
+
+[node name="Base" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-64, -2, 64, -2, 56, 10, -56, 10)
+color = Color(0.15, 0.19, 0.28, 1)
+
+[node name="Pad" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-52, -10, 52, -10, 58, 2, -58, 2)
+color = Color(1, 0.623529, 0.262745, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_plate")

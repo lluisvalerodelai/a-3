@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="1_exit"]
+[ext_resource type="PackedScene" path="res://scenes/world/kill_zone.tscn" id="2_kill"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(260, 32)
+
+[node name="Chamber01Movement" type="Node2D"]
+metadata/hint = "Climb the three platforms. The green gateway is your way out."
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.035, 0.055, 0.105, 1)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="Visual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(390, 570)
+
+[node name="Visual" type="Polygon2D" parent="Platform1"]
+polygon = PackedVector2Array(-130, -16, 130, -16, 130, 16, -130, 16)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("PlatformShape")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(780, 480)
+
+[node name="Visual" type="Polygon2D" parent="Platform2"]
+polygon = PackedVector2Array(-130, -16, 130, -16, 130, 16, -130, 16)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("PlatformShape")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(1080, 390)
+
+[node name="Visual" type="Polygon2D" parent="Platform3"]
+polygon = PackedVector2Array(-130, -16, 130, -16, 130, 16, -130, 16)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("PlatformShape")
+
+[node name="Exit" parent="." instance=ExtResource("1_exit")]
+position = Vector2(1160, 310)
+
+[node name="KillZone" parent="." instance=ExtResource("2_kill")]
+position = Vector2(640, 760)
+scale = Vector2(6, 1)

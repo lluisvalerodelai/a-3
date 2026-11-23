@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/turret.tscn" id="1_turret"]
+[ext_resource type="PackedScene" path="res://scenes/combat/projectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="3_exit"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="CoverShape"]
+size = Vector2(72, 120)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(240, 28)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(100, 24)
+
+[node name="TurretTimingChamber" type="Node2D"]
+metadata/hint = "Watch the turret's rhythm. Move through the gaps between shots."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 590)
+
+[node name="ExitSpawn" type="Marker2D" parent="."]
+position = Vector2(1120, 350)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="CoverA" type="StaticBody2D" parent="."]
+position = Vector2(390, 580)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoverA"]
+shape = SubResource("CoverShape")
+
+[node name="Visual" type="Polygon2D" parent="CoverA"]
+polygon = PackedVector2Array(-36, -60, 36, -60, 36, 60, -36, 60)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="CoverB" type="StaticBody2D" parent="."]
+position = Vector2(720, 580)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoverB"]
+shape = SubResource("CoverShape")
+
+[node name="Visual" type="Polygon2D" parent="CoverB"]
+polygon = PackedVector2Array(-36, -60, 36, -60, 36, 60, -36, 60)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="ExitPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1090, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPlatform"]
+shape = SubResource("PlatformShape")
+
+[node name="Visual" type="Polygon2D" parent="ExitPlatform"]
+polygon = PackedVector2Array(-120, -14, 120, -14, 120, 14, -120, 14)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="Turret" parent="." instance=ExtResource("1_turret")]
+position = Vector2(1100, 600)
+projectile_scene = ExtResource("2_projectile")
+fire_direction = Vector2(-1, 0)
+fire_interval = 1.35
+
+[node name="Exit" parent="." instance=ExtResource("3_exit")]
+position = Vector2(1120, 350)
+
+[node name="ExitStep" type="StaticBody2D" parent="."]
+position = Vector2(850, 482)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitStep"]
+shape = SubResource("StepShape")
+
+[node name="Visual" type="Polygon2D" parent="ExitStep"]
+polygon = PackedVector2Array(-50, -12, 50, -12, 50, 12, -50, 12)
+color = Color(0.22, 0.31, 0.48, 1)

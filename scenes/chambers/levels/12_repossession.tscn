@@ -1,0 +1,246 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="crate"]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="door"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(200, 20)
+
+[sub_resource type="RectangleShape2D" id="ObservationFloorShape"]
+size = Vector2(250, 20)
+
+[sub_resource type="RectangleShape2D" id="ObservationStopShape"]
+size = Vector2(20, 280)
+
+[sub_resource type="RectangleShape2D" id="GateAShape"]
+size = Vector2(40, 360)
+
+[sub_resource type="RectangleShape2D" id="GateBShape"]
+size = Vector2(40, 460)
+
+[sub_resource type="RectangleShape2D" id="GateFShape"]
+size = Vector2(40, 460)
+
+[node name="Chamber12" type="Node2D"]
+metadata/hint = "It opened the way. It does not have to keep it open."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 680.0)
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640.0, -40.0, 640.0, -40.0, 640.0, 40.0, -640.0, 40.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1270.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 170.0)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+polygon = PackedVector2Array(-620.0, -10.0, 620.0, -10.0, 620.0, 10.0, -620.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="Crate" parent="." instance=ExtResource("crate")]
+position = Vector2(190, 618)
+
+[node name="PlateA" parent="." instance=ExtResource("plate")]
+position = Vector2(280, 632)
+
+[node name="LabelA" type="Label" parent="."]
+offset_left = 240
+offset_top = 576
+text = "A"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Step" type="StaticBody2D" parent="."]
+position = Vector2(480.0, 550.0)
+
+[node name="Visual" type="Polygon2D" parent="Step"]
+polygon = PackedVector2Array(-100.0, -10.0, 100.0, -10.0, 100.0, 10.0, -100.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Step"]
+shape = SubResource("StepShape")
+
+[node name="ObservationFloor" type="StaticBody2D" parent="."]
+position = Vector2(775.0, 450.0)
+
+[node name="Visual" type="Polygon2D" parent="ObservationFloor"]
+polygon = PackedVector2Array(-125.0, -10.0, 125.0, -10.0, 125.0, 10.0, -125.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObservationFloor"]
+shape = SubResource("ObservationFloorShape")
+
+[node name="ObservationStop" type="StaticBody2D" parent="."]
+position = Vector2(890.0, 320.0)
+
+[node name="Visual" type="Polygon2D" parent="ObservationStop"]
+polygon = PackedVector2Array(-10.0, -140.0, 10.0, -140.0, 10.0, 140.0, -10.0, 140.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObservationStop"]
+shape = SubResource("ObservationStopShape")
+
+[node name="GateA" type="StaticBody2D" parent="."]
+position = Vector2(560.0, 360.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-20.0, -180.0, 20.0, -180.0, 20.0, 180.0, -20.0, 180.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-4.0, -174.0, 4.0, -174.0, 4.0, 174.0, -4.0, 174.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateA"]
+shape = SubResource("GateAShape")
+
+[node name="GateALabel" type="Label" parent="."]
+offset_left = 542
+offset_top = 184
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateB" parent="." instance=ExtResource("plate")]
+position = Vector2(820, 432)
+
+[node name="LabelB" type="Label" parent="."]
+offset_left = 780
+offset_top = 376
+text = "B"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateF" parent="." instance=ExtResource("plate")]
+position = Vector2(960, 632)
+
+[node name="LabelF" type="Label" parent="."]
+offset_left = 920
+offset_top = 576
+text = "F"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateB" type="StaticBody2D" parent="."]
+position = Vector2(1080.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-20.0, -230.0, 20.0, -230.0, 20.0, 230.0, -20.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateB"]
+shape = SubResource("GateBShape")
+
+[node name="GateBLabel" type="Label" parent="."]
+offset_left = 1062
+offset_top = 184
+text = "B"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateF" type="StaticBody2D" parent="."]
+position = Vector2(1150.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateF"]
+polygon = PackedVector2Array(-20.0, -230.0, 20.0, -230.0, 20.0, 230.0, -20.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateF"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateF"]
+shape = SubResource("GateFShape")
+
+[node name="GateFLabel" type="Label" parent="."]
+offset_left = 1132
+offset_top = 184
+text = "F"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1220, 592)
+
+[node name="ReturnNote" type="Label" parent="."]
+offset_left = 450
+offset_top = 596
+text = "BORROW IT BACK"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="CircuitA" type="Line2D" parent="."]
+points = PackedVector2Array(280, 635, 280, 660, 520, 660, 520, 400)
+width = 1.5
+default_color = Color(0.45, 0.65, 0.75, 0.24)
+z_index = -1
+
+[connection signal="active_changed" from="PlateA" to="GateA" method="set_open"]
+
+[connection signal="active_changed" from="PlateB" to="GateB" method="set_open"]
+
+[connection signal="active_changed" from="PlateF" to="GateF" method="set_open"]

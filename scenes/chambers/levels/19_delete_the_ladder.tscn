@@ -1,0 +1,238 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="crate"]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="door"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="HighLedgeShape"]
+size = Vector2(250, 20)
+
+[sub_resource type="RectangleShape2D" id="HighStopShape"]
+size = Vector2(20, 320)
+
+[sub_resource type="RectangleShape2D" id="GateAShape"]
+size = Vector2(32, 460)
+
+[sub_resource type="RectangleShape2D" id="GateBShape"]
+size = Vector2(32, 460)
+
+[sub_resource type="RectangleShape2D" id="GateCShape"]
+size = Vector2(32, 460)
+
+[node name="Chamber19" type="Node2D"]
+metadata/hint = "Keep the lesson. Replace the teacher."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 680.0)
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640.0, -40.0, 640.0, -40.0, 640.0, 40.0, -640.0, 40.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1270.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 170.0)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+polygon = PackedVector2Array(-620.0, -10.0, 620.0, -10.0, 620.0, 10.0, -620.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="Crate" parent="." instance=ExtResource("crate")]
+position = Vector2(200, 618)
+
+[node name="HighLedge" type="StaticBody2D" parent="."]
+position = Vector2(755.0, 490.0)
+
+[node name="Visual" type="Polygon2D" parent="HighLedge"]
+polygon = PackedVector2Array(-125.0, -10.0, 125.0, -10.0, 125.0, 10.0, -125.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HighLedge"]
+shape = SubResource("HighLedgeShape")
+
+[node name="HighStop" type="StaticBody2D" parent="."]
+position = Vector2(870.0, 340.0)
+
+[node name="Visual" type="Polygon2D" parent="HighStop"]
+polygon = PackedVector2Array(-10.0, -160.0, 10.0, -160.0, 10.0, 160.0, -10.0, 160.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HighStop"]
+shape = SubResource("HighStopShape")
+
+[node name="PlateA" parent="." instance=ExtResource("plate")]
+position = Vector2(300, 632)
+
+[node name="LabelA" type="Label" parent="."]
+offset_left = 260
+offset_top = 576
+text = "A"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateB" parent="." instance=ExtResource("plate")]
+position = Vector2(800, 472)
+
+[node name="LabelB" type="Label" parent="."]
+offset_left = 760
+offset_top = 416
+text = "B"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateC" parent="." instance=ExtResource("plate")]
+position = Vector2(800, 632)
+
+[node name="LabelC" type="Label" parent="."]
+offset_left = 760
+offset_top = 576
+text = "C"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateA" type="StaticBody2D" parent="."]
+position = Vector2(986.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-16.0, -230.0, 16.0, -230.0, 16.0, 230.0, -16.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateA"]
+shape = SubResource("GateAShape")
+
+[node name="GateALabel" type="Label" parent="."]
+offset_left = 972
+offset_top = 184
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateB" type="StaticBody2D" parent="."]
+position = Vector2(1066.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-16.0, -230.0, 16.0, -230.0, 16.0, 230.0, -16.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateB"]
+shape = SubResource("GateBShape")
+
+[node name="GateBLabel" type="Label" parent="."]
+offset_left = 1052
+offset_top = 184
+text = "B"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateC" type="StaticBody2D" parent="."]
+position = Vector2(1146.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateC"]
+polygon = PackedVector2Array(-16.0, -230.0, 16.0, -230.0, 16.0, 230.0, -16.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateC"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateC"]
+shape = SubResource("GateCShape")
+
+[node name="GateCLabel" type="Label" parent="."]
+offset_left = 1132
+offset_top = 184
+text = "C"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1220, 592)
+
+[node name="LaunchMark" type="Marker2D" parent="."]
+position = Vector2(500, 624)
+
+[node name="LaunchNote" type="Label" parent="."]
+offset_left = 420
+offset_top = 568
+text = "HELPER, THEN CRATE"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="HighNote" type="Label" parent="."]
+offset_left = 655
+offset_top = 430
+text = "KEEP THIS RECORDING"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[connection signal="active_changed" from="PlateA" to="GateA" method="set_open"]
+
+[connection signal="active_changed" from="PlateB" to="GateB" method="set_open"]
+
+[connection signal="active_changed" from="PlateC" to="GateC" method="set_open"]

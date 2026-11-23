@@ -1,0 +1,294 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="door"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[ext_resource type="PackedScene" path="res://scenes/combat/projectile.tscn" id="projectile"]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/turret.tscn" id="turret"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(100, 20)
+
+[sub_resource type="RectangleShape2D" id="CoveredRouteShape"]
+size = Vector2(220, 20)
+
+[sub_resource type="RectangleShape2D" id="StationFloorShape"]
+size = Vector2(240, 20)
+
+[sub_resource type="RectangleShape2D" id="GateAShape"]
+size = Vector2(32, 180)
+
+[sub_resource type="RectangleShape2D" id="ShutterShape"]
+size = Vector2(24, 100)
+
+[sub_resource type="RectangleShape2D" id="TurretHoodShape"]
+size = Vector2(12, 220)
+
+[sub_resource type="RectangleShape2D" id="TurretRoofShape"]
+size = Vector2(112, 20)
+
+[sub_resource type="RectangleShape2D" id="TurretFloorShape"]
+size = Vector2(112, 20)
+
+[sub_resource type="RectangleShape2D" id="GateQShape"]
+size = Vector2(28, 220)
+
+[sub_resource type="RectangleShape2D" id="ExitRoofShape"]
+size = Vector2(108, 20)
+
+[node name="Chamber18" type="Node2D"]
+metadata/hint = "Opening it is only half the job."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 680.0)
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640.0, -40.0, 640.0, -40.0, 640.0, 40.0, -640.0, 40.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1270.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 170.0)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+polygon = PackedVector2Array(-620.0, -10.0, 620.0, -10.0, 620.0, 10.0, -620.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="PlateA" parent="." instance=ExtResource("plate")]
+position = Vector2(240, 632)
+
+[node name="LabelA" type="Label" parent="."]
+offset_left = 200
+offset_top = 576
+text = "A"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Step" type="StaticBody2D" parent="."]
+position = Vector2(400.0, 550.0)
+
+[node name="Visual" type="Polygon2D" parent="Step"]
+polygon = PackedVector2Array(-50.0, -10.0, 50.0, -10.0, 50.0, 10.0, -50.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Step"]
+shape = SubResource("StepShape")
+
+[node name="CoveredRoute" type="StaticBody2D" parent="."]
+position = Vector2(590.0, 450.0)
+
+[node name="Visual" type="Polygon2D" parent="CoveredRoute"]
+polygon = PackedVector2Array(-110.0, -10.0, 110.0, -10.0, 110.0, 10.0, -110.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoveredRoute"]
+shape = SubResource("CoveredRouteShape")
+
+[node name="StationFloor" type="StaticBody2D" parent="."]
+position = Vector2(920.0, 350.0)
+
+[node name="Visual" type="Polygon2D" parent="StationFloor"]
+polygon = PackedVector2Array(-120.0, -10.0, 120.0, -10.0, 120.0, 10.0, -120.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StationFloor"]
+shape = SubResource("StationFloorShape")
+
+[node name="PlateQ" parent="." instance=ExtResource("plate")]
+position = Vector2(930, 332)
+
+[node name="LabelQ" type="Label" parent="."]
+offset_left = 890
+offset_top = 276
+text = "Q"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateA" type="StaticBody2D" parent="."]
+position = Vector2(576.0, 550.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-16.0, -90.0, 16.0, -90.0, 16.0, 90.0, -16.0, 90.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-4.0, -84.0, 4.0, -84.0, 4.0, 84.0, -4.0, 84.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateA"]
+shape = SubResource("GateAShape")
+
+[node name="GateALabel" type="Label" parent="."]
+offset_left = 562
+offset_top = 438
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Shutter" type="StaticBody2D" parent="."]
+position = Vector2(1092.0, 310.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="Shutter"]
+polygon = PackedVector2Array(-12.0, -50.0, 12.0, -50.0, 12.0, 50.0, -12.0, 50.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="Shutter"]
+polygon = PackedVector2Array(-4.0, -44.0, 4.0, -44.0, 4.0, 44.0, -4.0, 44.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shutter"]
+shape = SubResource("ShutterShape")
+
+[node name="ShutterLabel" type="Label" parent="."]
+offset_left = 1082
+offset_top = 238
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="TurretHood" type="StaticBody2D" parent="."]
+position = Vector2(1154.0, 310.0)
+
+[node name="Visual" type="Polygon2D" parent="TurretHood"]
+polygon = PackedVector2Array(-6.0, -110.0, 6.0, -110.0, 6.0, 110.0, -6.0, 110.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretHood"]
+shape = SubResource("TurretHoodShape")
+
+[node name="TurretRoof" type="StaticBody2D" parent="."]
+position = Vector2(1204.0, 210.0)
+
+[node name="Visual" type="Polygon2D" parent="TurretRoof"]
+polygon = PackedVector2Array(-56.0, -10.0, 56.0, -10.0, 56.0, 10.0, -56.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretRoof"]
+shape = SubResource("TurretRoofShape")
+
+[node name="TurretFloor" type="StaticBody2D" parent="."]
+position = Vector2(1204.0, 410.0)
+
+[node name="Visual" type="Polygon2D" parent="TurretFloor"]
+polygon = PackedVector2Array(-56.0, -10.0, 56.0, -10.0, 56.0, 10.0, -56.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretFloor"]
+shape = SubResource("TurretFloorShape")
+
+[node name="Turret" parent="." instance=ExtResource("turret")]
+position = Vector2(1180, 310)
+projectile_scene = ExtResource("projectile")
+fire_interval = 1.5
+fire_direction = Vector2(-1, 0)
+
+[node name="GateQ" type="StaticBody2D" parent="."]
+position = Vector2(1134.0, 530.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateQ"]
+polygon = PackedVector2Array(-14.0, -110.0, 14.0, -110.0, 14.0, 110.0, -14.0, 110.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateQ"]
+polygon = PackedVector2Array(-4.0, -104.0, 4.0, -104.0, 4.0, 104.0, -4.0, 104.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateQ"]
+shape = SubResource("GateQShape")
+
+[node name="GateQLabel" type="Label" parent="."]
+offset_left = 1122
+offset_top = 398
+text = "Q"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1220, 592)
+
+[node name="ExitRoof" type="StaticBody2D" parent="."]
+position = Vector2(1094.0, 410.0)
+
+[node name="Visual" type="Polygon2D" parent="ExitRoof"]
+polygon = PackedVector2Array(-54.0, -10.0, 54.0, -10.0, 54.0, 10.0, -54.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitRoof"]
+shape = SubResource("ExitRoofShape")
+
+[node name="ShelterNote" type="Label" parent="."]
+offset_left = 650
+offset_top = 590
+text = "WAIT FOR THE SHUTTER"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="StationNote" type="Label" parent="."]
+offset_left = 810
+offset_top = 225
+text = "CLOSE BEFORE ARRIVAL"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[connection signal="active_changed" from="PlateA" to="GateA" method="set_open"]
+
+[connection signal="active_changed" from="PlateA" to="Shutter" method="set_open"]
+
+[connection signal="active_changed" from="PlateQ" to="GateQ" method="set_open"]

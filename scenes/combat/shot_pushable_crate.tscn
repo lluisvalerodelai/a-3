@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/shot_pushable_crate.gd" id="1_crate"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crate"]
+size = Vector2(44, 44)
+
+[node name="ShotPushableCrate" type="RigidBody2D"]
+script = ExtResource("1_crate")
+mass = 1.5
+lock_rotation = true
+can_sleep = false
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-22, -22, 22, -22, 22, 22, -22, 22)
+color = Color(0.94, 0.68, 0.24, 1)
+
+[node name="Inset" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-14, -14, 14, -14, 14, 14, -14, 14)
+color = Color(0.38, 0.27, 0.19, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_crate")

@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="1_plate"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="2_door"]
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="3_crate"]
+[ext_resource type="PackedScene" path="res://scenes/combat/fragile_target.tscn" id="4_target"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/moving_enemy.tscn" id="5_enemy"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/turret.tscn" id="6_turret"]
+[ext_resource type="PackedScene" path="res://scenes/combat/projectile.tscn" id="7_projectile"]
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="8_exit"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(230, 28)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(100, 24)
+
+[node name="FinalCombinedChamber" type="Node2D"]
+metadata/hint = "Combine your echoes, crates and timing. Keep every echo alive."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(90, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(90, 590)
+
+[node name="ExitSpawn" type="Marker2D" parent="."]
+position = Vector2(1170, 300)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="MiddlePlatform" type="StaticBody2D" parent="."]
+position = Vector2(650, 525)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddlePlatform"]
+shape = SubResource("PlatformShape")
+
+[node name="Visual" type="Polygon2D" parent="MiddlePlatform"]
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="ExitPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1110, 390)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPlatform"]
+shape = SubResource("PlatformShape")
+
+[node name="Visual" type="Polygon2D" parent="ExitPlatform"]
+polygon = PackedVector2Array(-115, -14, 115, -14, 115, 14, -115, 14)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="EchoPlate" parent="." instance=ExtResource("1_plate")]
+position = Vector2(270, 630)
+
+[node name="CratePlate" parent="." instance=ExtResource("1_plate")]
+position = Vector2(760, 630)
+
+[node name="ExitDoor" parent="." instance=ExtResource("2_door")]
+position = Vector2(940, 410)
+scale = Vector2(1, 2.875)
+
+[node name="Crate" parent="." instance=ExtResource("3_crate")]
+position = Vector2(480, 600)
+
+[node name="RemoteTarget" parent="." instance=ExtResource("4_target")]
+position = Vector2(650, 425)
+
+[node name="MovingEnemy" parent="." instance=ExtResource("5_enemy")]
+position = Vector2(560, 620)
+patrol_offset = Vector2(250, 0)
+
+[node name="Turret" parent="." instance=ExtResource("6_turret")]
+position = Vector2(1110, 600)
+projectile_scene = ExtResource("7_projectile")
+fire_direction = Vector2(-1, 0)
+fire_interval = 1.2
+
+[node name="Exit" parent="." instance=ExtResource("8_exit")]
+position = Vector2(1170, 300)
+
+[node name="ApproachStep" type="StaticBody2D" parent="."]
+position = Vector2(460, 562)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ApproachStep"]
+shape = SubResource("StepShape")
+
+[node name="Visual" type="Polygon2D" parent="ApproachStep"]
+polygon = PackedVector2Array(-50, -12, 50, -12, 50, 12, -50, 12)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="ExitStep" type="StaticBody2D" parent="."]
+position = Vector2(830, 452)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitStep"]
+shape = SubResource("StepShape")
+
+[node name="Visual" type="Polygon2D" parent="ExitStep"]
+polygon = PackedVector2Array(-50, -12, 50, -12, 50, 12, -50, 12)
+color = Color(0.22, 0.31, 0.48, 1)

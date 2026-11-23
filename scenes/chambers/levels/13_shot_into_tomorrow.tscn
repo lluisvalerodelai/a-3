@@ -1,0 +1,299 @@
+[gd_scene format=3 uid="uid://cnofhgfbvub42"]
+
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="crate"]
+[ext_resource type="Script" uid="uid://dsegayk72m3r5" path="res://scripts/interactables/door.gd" id="door"]
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+[ext_resource type="Script" uid="uid://b4cd2s7hf6m4" path="res://scripts/combat/fragile_target.gd" id="fragile"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="SpawnLedgeShape"]
+size = Vector2(160, 24)
+
+[sub_resource type="RectangleShape2D" id="UpperBridgeShape"]
+size = Vector2(260, 24)
+
+[sub_resource type="RectangleShape2D" id="ControlWalkShape"]
+size = Vector2(340, 40)
+
+[sub_resource type="RectangleShape2D" id="GunWallTopShape"]
+size = Vector2(12, 268)
+
+[sub_resource type="RectangleShape2D" id="GunWallBottomShape"]
+size = Vector2(12, 26)
+
+[sub_resource type="RectangleShape2D" id="MachineRoofShape"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="MachineLeftTopShape"]
+size = Vector2(20, 100)
+
+[sub_resource type="RectangleShape2D" id="MachineLeftBottomShape"]
+size = Vector2(20, 116)
+
+[sub_resource type="RectangleShape2D" id="MachineRightShape"]
+size = Vector2(20, 240)
+
+[sub_resource type="RectangleShape2D" id="ShutterShape"]
+size = Vector2(20, 24)
+
+[sub_resource type="RectangleShape2D" id="SupportShape"]
+size = Vector2(60, 20)
+
+[sub_resource type="RectangleShape2D" id="GateBShape"]
+size = Vector2(40, 460)
+
+[node name="Chamber13" type="Node2D" unique_id=1981944748]
+metadata/hint = "Record the shot. Supply the opening."
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=849847932]
+position = Vector2(100, 384)
+
+[node name="EchoSpawn" type="Marker2D" parent="." unique_id=352908545]
+position = Vector2(100, 384)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=981265444]
+position = Vector2(640, 680)
+
+[node name="Visual" type="Polygon2D" parent="Floor" unique_id=778774739]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1086389657]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=279657289]
+position = Vector2(10, 400)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall" unique_id=1760674881]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-10, -240, 10, -240, 10, 240, -10, 240)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=672885517]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1821416135]
+position = Vector2(1270, 400)
+
+[node name="Visual" type="Polygon2D" parent="RightWall" unique_id=1681492139]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-10, -240, 10, -240, 10, 240, -10, 240)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=799199216]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1554651442]
+position = Vector2(640, 170)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling" unique_id=2097411320]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-620, -10, 620, -10, 620, 10, -620, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1370733600]
+shape = SubResource("CeilingShape")
+
+[node name="SpawnLedge" type="StaticBody2D" parent="." unique_id=1179150500]
+position = Vector2(100, 412)
+
+[node name="Visual" type="Polygon2D" parent="SpawnLedge" unique_id=424339874]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-80, -12, 80, -12, 80, 12, -80, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnLedge" unique_id=746323516]
+shape = SubResource("SpawnLedgeShape")
+
+[node name="UpperBridge" type="StaticBody2D" parent="." unique_id=161510895]
+position = Vector2(430, 312)
+
+[node name="Visual" type="Polygon2D" parent="UpperBridge" unique_id=1884819971]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-130, -12, 130, -12, 130, 12, -130, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBridge" unique_id=1775892626]
+shape = SubResource("UpperBridgeShape")
+
+[node name="ControlWalk" type="StaticBody2D" parent="." unique_id=333701223]
+position = Vector2(790, 300)
+
+[node name="Visual" type="Polygon2D" parent="ControlWalk" unique_id=2109513383]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-170, -20, 170, -20, 170, 20, -170, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlWalk" unique_id=1221944161]
+shape = SubResource("ControlWalkShape")
+
+[node name="PlateA" parent="." unique_id=313186864 instance=ExtResource("plate")]
+position = Vector2(720, 272)
+
+[node name="LabelA" type="Label" parent="." unique_id=1041952628]
+offset_left = 680.0
+offset_top = 216.0
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "A"
+
+[node name="GunWallTop" type="StaticBody2D" parent="." unique_id=291578437]
+position = Vector2(406, 458)
+
+[node name="Visual" type="Polygon2D" parent="GunWallTop" unique_id=1637718128]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-6, -134, 6, -134, 6, 134, -6, 134)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GunWallTop" unique_id=1555633628]
+shape = SubResource("GunWallTopShape")
+
+[node name="GunWallBottom" type="StaticBody2D" parent="." unique_id=1667126081]
+position = Vector2(406, 627)
+
+[node name="Visual" type="Polygon2D" parent="GunWallBottom" unique_id=823742309]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-6, -13, 6, -13, 6, 13, -6, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GunWallBottom" unique_id=1517697281]
+shape = SubResource("GunWallBottomShape")
+
+[node name="MachineRoof" type="StaticBody2D" parent="." unique_id=1448943502]
+position = Vector2(860, 380)
+
+[node name="Visual" type="Polygon2D" parent="MachineRoof" unique_id=1241363705]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-80, -20, 80, -20, 80, 20, -80, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MachineRoof" unique_id=1299016290]
+shape = SubResource("MachineRoofShape")
+
+[node name="MachineLeftTop" type="StaticBody2D" parent="." unique_id=1044806464]
+position = Vector2(790, 450)
+
+[node name="Visual" type="Polygon2D" parent="MachineLeftTop" unique_id=1487788966]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-10, -50, 10, -50, 10, 50, -10, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MachineLeftTop" unique_id=1473392707]
+shape = SubResource("MachineLeftTopShape")
+
+[node name="MachineLeftBottom" type="StaticBody2D" parent="." unique_id=2138908833]
+position = Vector2(790, 582)
+
+[node name="Visual" type="Polygon2D" parent="MachineLeftBottom" unique_id=304197397]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-10, -58, 10, -58, 10, 58, -10, 58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MachineLeftBottom" unique_id=327074560]
+shape = SubResource("MachineLeftBottomShape")
+
+[node name="MachineRight" type="StaticBody2D" parent="." unique_id=948996166]
+position = Vector2(930, 520)
+
+[node name="Visual" type="Polygon2D" parent="MachineRight" unique_id=656857745]
+color = Color(0.11, 0.19, 0.26, 1)
+polygon = PackedVector2Array(-10, -120, 10, -120, 10, 120, -10, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MachineRight" unique_id=762706508]
+shape = SubResource("MachineRightShape")
+
+[node name="Shutter" type="StaticBody2D" parent="." unique_id=2017024850]
+position = Vector2(790, 512)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="Shutter" unique_id=1649259256]
+color = Color(1, 0.36, 0.45, 1)
+polygon = PackedVector2Array(-10, -12, 10, -12, 10, 12, -10, 12)
+
+[node name="Core" type="Polygon2D" parent="Shutter" unique_id=1075719747]
+color = Color(1, 0.82, 0.88, 0.75)
+polygon = PackedVector2Array(-4, -6, 4, -6, 4, 6, -4, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shutter" unique_id=441401335]
+shape = SubResource("ShutterShape")
+
+[node name="ShutterLabel" type="Label" parent="." unique_id=1673008665]
+offset_left = 782.0
+offset_top = 478.0
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+text = "A"
+
+[node name="Support" type="StaticBody2D" parent="." unique_id=873239210]
+position = Vector2(850, 500)
+script = ExtResource("fragile")
+
+[node name="Frame" type="Polygon2D" parent="Support" unique_id=585573107]
+color = Color(0.95, 0.3, 0.5, 1)
+polygon = PackedVector2Array(-30, -10, 30, -10, 30, 10, -30, 10)
+
+[node name="Core" type="Polygon2D" parent="Support" unique_id=1363706049]
+color = Color(1, 0.75, 0.85, 1)
+polygon = PackedVector2Array(-26, -2, 26, -2, 26, 2, -26, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Support" unique_id=677117607]
+shape = SubResource("SupportShape")
+
+[node name="Crate" parent="." unique_id=1804837785 instance=ExtResource("crate")]
+position = Vector2(850, 468)
+
+[node name="PlateB" parent="." unique_id=1717463807 instance=ExtResource("plate")]
+position = Vector2(850, 632)
+
+[node name="LabelB" type="Label" parent="." unique_id=1266090034]
+offset_left = 810.0
+offset_top = 576.0
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "B"
+
+[node name="GateB" type="StaticBody2D" parent="." unique_id=1949430995]
+position = Vector2(1080, 410)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateB" unique_id=928105782]
+color = Color(1, 0.36, 0.45, 1)
+polygon = PackedVector2Array(-20, -230, 20, -230, 20, 230, -20, 230)
+
+[node name="Core" type="Polygon2D" parent="GateB" unique_id=853496054]
+color = Color(1, 0.82, 0.88, 0.75)
+polygon = PackedVector2Array(-4, -224, 4, -224, 4, 224, -4, 224)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateB" unique_id=1887601244]
+shape = SubResource("GateBShape")
+
+[node name="GateBLabel" type="Label" parent="." unique_id=1239709292]
+offset_left = 1062.0
+offset_top = 184.0
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+text = "B"
+
+[node name="Exit" parent="." unique_id=569971524 instance=ExtResource("exit")]
+position = Vector2(1190, 592)
+
+[node name="FiringMark" type="Marker2D" parent="." unique_id=1256395978]
+position = Vector2(300, 624)
+
+[node name="FiringNote" type="Label" parent="." unique_id=599781323]
+offset_left = 215.0
+offset_top = 568.0
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+text = "WAIT. THEN FIRE."
+
+[node name="MachineNote" type="Label" parent="." unique_id=540594086]
+offset_left = 810.0
+offset_top = 328.0
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+text = "A SHOT FOR LATER"
+
+[connection signal="active_changed" from="PlateA" to="Shutter" method="set_open"]
+[connection signal="active_changed" from="PlateB" to="GateB" method="set_open"]

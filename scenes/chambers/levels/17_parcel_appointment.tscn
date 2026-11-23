@@ -1,0 +1,293 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="crate"]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="door"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="SpawnLedgeShape"]
+size = Vector2(340, 24)
+
+[sub_resource type="RectangleShape2D" id="CrossingStepShape"]
+size = Vector2(90, 20)
+
+[sub_resource type="RectangleShape2D" id="DockFloorShape"]
+size = Vector2(560, 24)
+
+[sub_resource type="RectangleShape2D" id="WellRightShape"]
+size = Vector2(20, 220)
+
+[sub_resource type="RectangleShape2D" id="DockBackstopShape"]
+size = Vector2(20, 120)
+
+[sub_resource type="RectangleShape2D" id="HighStationShape"]
+size = Vector2(100, 20)
+
+[sub_resource type="RectangleShape2D" id="GateAShape"]
+size = Vector2(32, 196)
+
+[sub_resource type="RectangleShape2D" id="GateBShape"]
+size = Vector2(32, 196)
+
+[sub_resource type="RectangleShape2D" id="GateCShape"]
+size = Vector2(32, 196)
+
+[node name="Chamber17" type="Node2D"]
+metadata/hint = "Someone can be waiting before there is a delivery."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 404)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 404)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 680.0)
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640.0, -40.0, 640.0, -40.0, 640.0, 40.0, -640.0, 40.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1270.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 170.0)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+polygon = PackedVector2Array(-620.0, -10.0, 620.0, -10.0, 620.0, 10.0, -620.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="SpawnLedge" type="StaticBody2D" parent="."]
+position = Vector2(190.0, 432.0)
+
+[node name="Visual" type="Polygon2D" parent="SpawnLedge"]
+polygon = PackedVector2Array(-170.0, -12.0, 170.0, -12.0, 170.0, 12.0, -170.0, 12.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnLedge"]
+shape = SubResource("SpawnLedgeShape")
+
+[node name="CrossingStep" type="StaticBody2D" parent="."]
+position = Vector2(445.0, 330.0)
+
+[node name="Visual" type="Polygon2D" parent="CrossingStep"]
+polygon = PackedVector2Array(-45.0, -10.0, 45.0, -10.0, 45.0, 10.0, -45.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrossingStep"]
+shape = SubResource("CrossingStepShape")
+
+[node name="DockFloor" type="StaticBody2D" parent="."]
+position = Vector2(940.0, 432.0)
+
+[node name="Visual" type="Polygon2D" parent="DockFloor"]
+polygon = PackedVector2Array(-280.0, -12.0, 280.0, -12.0, 280.0, 12.0, -280.0, 12.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DockFloor"]
+shape = SubResource("DockFloorShape")
+
+[node name="WellRight" type="StaticBody2D" parent="."]
+position = Vector2(650.0, 530.0)
+
+[node name="Visual" type="Polygon2D" parent="WellRight"]
+polygon = PackedVector2Array(-10.0, -110.0, 10.0, -110.0, 10.0, 110.0, -10.0, 110.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WellRight"]
+shape = SubResource("WellRightShape")
+
+[node name="DockBackstop" type="StaticBody2D" parent="."]
+position = Vector2(910.0, 360.0)
+
+[node name="Visual" type="Polygon2D" parent="DockBackstop"]
+polygon = PackedVector2Array(-10.0, -60.0, 10.0, -60.0, 10.0, 60.0, -10.0, 60.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DockBackstop"]
+shape = SubResource("DockBackstopShape")
+
+[node name="HighStation" type="StaticBody2D" parent="."]
+position = Vector2(1170.0, 310.0)
+
+[node name="Visual" type="Polygon2D" parent="HighStation"]
+polygon = PackedVector2Array(-50.0, -10.0, 50.0, -10.0, 50.0, 10.0, -50.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HighStation"]
+shape = SubResource("HighStationShape")
+
+[node name="Crate" parent="." instance=ExtResource("crate")]
+position = Vector2(500, 618)
+
+[node name="PlateA" parent="." instance=ExtResource("plate")]
+position = Vector2(520, 632)
+
+[node name="LabelA" type="Label" parent="."]
+offset_left = 480
+offset_top = 576
+text = "A"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateC" parent="." instance=ExtResource("plate")]
+position = Vector2(1040, 412)
+
+[node name="LabelC" type="Label" parent="."]
+offset_left = 1000
+offset_top = 356
+text = "C"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateB" parent="." instance=ExtResource("plate")]
+position = Vector2(1170, 292)
+
+[node name="LabelB" type="Label" parent="."]
+offset_left = 1130
+offset_top = 236
+text = "B"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateA" type="StaticBody2D" parent="."]
+position = Vector2(1176.0, 542.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-16.0, -98.0, 16.0, -98.0, 16.0, 98.0, -16.0, 98.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateA"]
+polygon = PackedVector2Array(-4.0, -92.0, 4.0, -92.0, 4.0, 92.0, -4.0, 92.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateA"]
+shape = SubResource("GateAShape")
+
+[node name="GateALabel" type="Label" parent="."]
+offset_left = 1162
+offset_top = 422
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateB" type="StaticBody2D" parent="."]
+position = Vector2(1076.0, 542.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-16.0, -98.0, 16.0, -98.0, 16.0, 98.0, -16.0, 98.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-4.0, -92.0, 4.0, -92.0, 4.0, 92.0, -4.0, 92.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateB"]
+shape = SubResource("GateBShape")
+
+[node name="GateBLabel" type="Label" parent="."]
+offset_left = 1062
+offset_top = 422
+text = "B"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateC" type="StaticBody2D" parent="."]
+position = Vector2(976.0, 542.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateC"]
+polygon = PackedVector2Array(-16.0, -98.0, 16.0, -98.0, 16.0, 98.0, -16.0, 98.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateC"]
+polygon = PackedVector2Array(-4.0, -92.0, 4.0, -92.0, 4.0, 92.0, -4.0, 92.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateC"]
+shape = SubResource("GateCShape")
+
+[node name="GateCLabel" type="Label" parent="."]
+offset_left = 962
+offset_top = 422
+text = "C"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Exit" parent="." instance=ExtResource("exit")]
+position = Vector2(820, 592)
+
+[node name="PickupMark" type="Marker2D" parent="."]
+position = Vector2(780, 404)
+
+[node name="ThrowMark" type="Marker2D" parent="."]
+position = Vector2(520, 624)
+
+[node name="PickupNote" type="Label" parent="."]
+offset_left = 690
+offset_top = 352
+text = "PICKUP APPOINTMENT"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="ThrowNote" type="Label" parent="."]
+offset_left = 400
+offset_top = 576
+text = "DELIVER FROM HERE"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[connection signal="active_changed" from="PlateA" to="GateA" method="set_open"]
+
+[connection signal="active_changed" from="PlateB" to="GateB" method="set_open"]
+
+[connection signal="active_changed" from="PlateC" to="GateC" method="set_open"]

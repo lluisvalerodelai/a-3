@@ -1,0 +1,249 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="door"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="plate"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="LeftWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="RightWallShape"]
+size = Vector2(20, 480)
+
+[sub_resource type="RectangleShape2D" id="CeilingShape"]
+size = Vector2(1240, 20)
+
+[sub_resource type="RectangleShape2D" id="StepOneShape"]
+size = Vector2(120, 20)
+
+[sub_resource type="RectangleShape2D" id="StepTwoShape"]
+size = Vector2(120, 20)
+
+[sub_resource type="RectangleShape2D" id="UpperApproachShape"]
+size = Vector2(60, 20)
+
+[sub_resource type="RectangleShape2D" id="UpperLandingShape"]
+size = Vector2(240, 20)
+
+[sub_resource type="RectangleShape2D" id="HatchShape"]
+size = Vector2(160, 20)
+
+[sub_resource type="RectangleShape2D" id="CatchLaneShape"]
+size = Vector2(400, 20)
+
+[sub_resource type="RectangleShape2D" id="EndStopShape"]
+size = Vector2(20, 380)
+
+[sub_resource type="RectangleShape2D" id="GateBShape"]
+size = Vector2(40, 460)
+
+[node name="Chamber11" type="Node2D"]
+metadata/hint = "Change the floor, keep the footsteps."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 624)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 680.0)
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640.0, -40.0, 640.0, -40.0, 640.0, 40.0, -640.0, 40.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(10.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="LeftWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("LeftWallShape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1270.0, 400.0)
+
+[node name="Visual" type="Polygon2D" parent="RightWall"]
+polygon = PackedVector2Array(-10.0, -240.0, 10.0, -240.0, 10.0, 240.0, -10.0, 240.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RightWallShape")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640.0, 170.0)
+
+[node name="Visual" type="Polygon2D" parent="Ceiling"]
+polygon = PackedVector2Array(-620.0, -10.0, 620.0, -10.0, 620.0, 10.0, -620.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("CeilingShape")
+
+[node name="StepOne" type="StaticBody2D" parent="."]
+position = Vector2(300.0, 550.0)
+
+[node name="Visual" type="Polygon2D" parent="StepOne"]
+polygon = PackedVector2Array(-60.0, -10.0, 60.0, -10.0, 60.0, 10.0, -60.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepOne"]
+shape = SubResource("StepOneShape")
+
+[node name="StepTwo" type="StaticBody2D" parent="."]
+position = Vector2(450.0, 450.0)
+
+[node name="Visual" type="Polygon2D" parent="StepTwo"]
+polygon = PackedVector2Array(-60.0, -10.0, 60.0, -10.0, 60.0, 10.0, -60.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepTwo"]
+shape = SubResource("StepTwoShape")
+
+[node name="UpperApproach" type="StaticBody2D" parent="."]
+position = Vector2(570.0, 410.0)
+
+[node name="Visual" type="Polygon2D" parent="UpperApproach"]
+polygon = PackedVector2Array(-30.0, -10.0, 30.0, -10.0, 30.0, 10.0, -30.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperApproach"]
+shape = SubResource("UpperApproachShape")
+
+[node name="UpperLanding" type="StaticBody2D" parent="."]
+position = Vector2(880.0, 410.0)
+
+[node name="Visual" type="Polygon2D" parent="UpperLanding"]
+polygon = PackedVector2Array(-120.0, -10.0, 120.0, -10.0, 120.0, 10.0, -120.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLanding"]
+shape = SubResource("UpperLandingShape")
+
+[node name="Hatch" type="StaticBody2D" parent="."]
+position = Vector2(680.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="Hatch"]
+polygon = PackedVector2Array(-80.0, -10.0, 80.0, -10.0, 80.0, 10.0, -80.0, 10.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="Hatch"]
+polygon = PackedVector2Array(-74.0, -4.0, 74.0, -4.0, 74.0, 4.0, -74.0, 4.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hatch"]
+shape = SubResource("HatchShape")
+
+[node name="HatchLabel" type="Label" parent="."]
+offset_left = 602
+offset_top = 378
+text = "A"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="CatchLane" type="StaticBody2D" parent="."]
+position = Vector2(800.0, 550.0)
+
+[node name="Visual" type="Polygon2D" parent="CatchLane"]
+polygon = PackedVector2Array(-200.0, -10.0, 200.0, -10.0, 200.0, 10.0, -200.0, 10.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CatchLane"]
+shape = SubResource("CatchLaneShape")
+
+[node name="EndStop" type="StaticBody2D" parent="."]
+position = Vector2(990.0, 370.0)
+
+[node name="Visual" type="Polygon2D" parent="EndStop"]
+polygon = PackedVector2Array(-10.0, -190.0, 10.0, -190.0, 10.0, 190.0, -10.0, 190.0)
+color = Color(0.11, 0.19, 0.26, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndStop"]
+shape = SubResource("EndStopShape")
+
+[node name="PlateA" parent="." instance=ExtResource("plate")]
+position = Vector2(150, 632)
+
+[node name="LabelA" type="Label" parent="."]
+offset_left = 110
+offset_top = 576
+text = "A"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="PlateB" parent="." instance=ExtResource("plate")]
+position = Vector2(930, 532)
+
+[node name="LabelB" type="Label" parent="."]
+offset_left = 890
+offset_top = 476
+text = "B"
+theme_override_colors/font_color = Color(1, 0.72, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="GateB" type="StaticBody2D" parent="."]
+position = Vector2(1080.0, 410.0)
+script = ExtResource("door")
+
+[node name="DoorVisual" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-20.0, -230.0, 20.0, -230.0, 20.0, 230.0, -20.0, 230.0)
+color = Color(1, 0.36, 0.45, 1)
+
+[node name="Core" type="Polygon2D" parent="GateB"]
+polygon = PackedVector2Array(-4.0, -224.0, 4.0, -224.0, 4.0, 224.0, -4.0, 224.0)
+color = Color(1, 0.82, 0.88, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateB"]
+shape = SubResource("GateBShape")
+
+[node name="GateBLabel" type="Label" parent="."]
+offset_left = 1062
+offset_top = 184
+text = "B"
+theme_override_colors/font_color = Color(1, 0.62, 0.65, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="Exit" parent="." instance=ExtResource("exit")]
+position = Vector2(1190, 592)
+
+[node name="UpperNote" type="Label" parent="."]
+offset_left = 760
+offset_top = 365
+text = "SAME STEPS"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="LowerNote" type="Label" parent="."]
+offset_left = 650
+offset_top = 502
+text = "NEW DESTINATION"
+theme_override_colors/font_color = Color(0.55, 0.72, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+mouse_filter = 2
+
+[node name="CircuitA" type="Line2D" parent="."]
+points = PackedVector2Array(150, 638, 150, 665, 570, 665, 570, 425, 680, 425)
+width = 1.5
+default_color = Color(0.45, 0.65, 0.75, 0.24)
+z_index = -1
+
+[connection signal="active_changed" from="PlateA" to="Hatch" method="set_open"]
+
+[connection signal="active_changed" from="PlateB" to="GateB" method="set_open"]

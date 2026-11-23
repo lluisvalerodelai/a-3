@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="1_exit"]
+[ext_resource type="PackedScene" path="res://scenes/world/kill_zone.tscn" id="2_kill"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="3_plate"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="4_door"]
+[ext_resource type="PackedScene" path="res://scenes/combat/shot_pushable_crate.tscn" id="5_crate"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="ShelfShape"]
+size = Vector2(360, 32)
+
+[sub_resource type="RectangleShape2D" id="StopShape"]
+size = Vector2(20, 44)
+
+[node name="Chamber04CarryThrow" type="Node2D"]
+metadata/hint = "Use E to pick up a crate. Aim with the mouse and right-click to throw."
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.055, 0.055, 0.115, 1)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="Visual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="Shelf" type="StaticBody2D" parent="."]
+position = Vector2(710, 480)
+
+[node name="Visual" type="Polygon2D" parent="Shelf"]
+polygon = PackedVector2Array(-180, -16, 180, -16, 180, 16, -180, 16)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf"]
+shape = SubResource("ShelfShape")
+
+[node name="Mechanics" type="Node2D" parent="."]
+
+[node name="CarryCrate" parent="Mechanics" instance=ExtResource("5_crate")]
+position = Vector2(260, 600)
+
+[node name="ThrowPlate" parent="Mechanics" instance=ExtResource("3_plate")]
+position = Vector2(700, 452)
+
+[node name="Door" parent="Mechanics" instance=ExtResource("4_door")]
+position = Vector2(990, 560)
+
+[node name="Exit" parent="." instance=ExtResource("1_exit")]
+position = Vector2(1160, 580)
+
+[node name="KillZone" parent="." instance=ExtResource("2_kill")]
+position = Vector2(640, 760)
+scale = Vector2(6, 1)
+
+[node name="CrateStop" type="StaticBody2D" parent="."]
+position = Vector2(786, 442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrateStop"]
+shape = SubResource("StopShape")
+
+[node name="Visual" type="Polygon2D" parent="CrateStop"]
+polygon = PackedVector2Array(-10, -22, 10, -22, 10, 22, -10, 22)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[connection signal="active_changed" from="Mechanics/ThrowPlate" to="Mechanics/Door" method="set_open"]

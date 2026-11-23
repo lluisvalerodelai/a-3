@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="1_plate"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="2_door"]
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="3_exit"]
+
+[sub_resource type="RectangleShape2D" id="FloorShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(260, 28)
+
+[sub_resource type="RectangleShape2D" id="WallShape"]
+size = Vector2(36, 110)
+
+[sub_resource type="RectangleShape2D" id="GoalShape"]
+size = Vector2(180, 28)
+
+[node name="RerecordSlotChamber" type="Node2D"]
+metadata/hint = "Select a saved slot twice to replace it. Your other echoes stay."
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(100, 590)
+
+[node name="ExitSpawn" type="Marker2D" parent="."]
+position = Vector2(1150, 410)
+
+[node name="Slot1RouteMarker" type="Marker2D" parent="."]
+position = Vector2(340, 620)
+
+[node name="Slot2RouteMarker" type="Marker2D" parent="."]
+position = Vector2(820, 470)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="Visual" type="Polygon2D" parent="Floor"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="UpperRoute" type="StaticBody2D" parent="."]
+position = Vector2(820, 510)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperRoute"]
+shape = SubResource("PlatformShape")
+
+[node name="Visual" type="Polygon2D" parent="UpperRoute"]
+polygon = PackedVector2Array(-130, -14, 130, -14, 130, 14, -130, 14)
+color = Color(0.22, 0.31, 0.48, 1)
+
+[node name="RouteDivider" type="StaticBody2D" parent="."]
+position = Vector2(620, 585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RouteDivider"]
+shape = SubResource("WallShape")
+
+[node name="Visual" type="Polygon2D" parent="RouteDivider"]
+polygon = PackedVector2Array(-18, -55, 18, -55, 18, 55, -18, 55)
+color = Color(0.25, 0.32, 0.49, 1)
+
+[node name="EarlySlotPlate" parent="." instance=ExtResource("1_plate")]
+position = Vector2(340, 630)
+
+[node name="LaterSlotPlate" parent="." instance=ExtResource("1_plate")]
+position = Vector2(820, 485)
+
+[node name="ExitDoor" parent="." instance=ExtResource("2_door")]
+position = Vector2(1020, 410)
+scale = Vector2(1, 2.875)
+
+[node name="Exit" parent="." instance=ExtResource("3_exit")]
+position = Vector2(1150, 410)
+
+[node name="ExitPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1150, 494)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPlatform"]
+shape = SubResource("GoalShape")
+
+[node name="Visual" type="Polygon2D" parent="ExitPlatform"]
+polygon = PackedVector2Array(-90, -14, 90, -14, 90, 14, -90, 14)
+color = Color(0.22, 0.31, 0.48, 1)

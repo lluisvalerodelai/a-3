@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/memory_overlay.gd" id="1_overlay"]
+[ext_resource type="Script" path="res://scripts/presentation/paper_panel.gd" id="2_paper"]
+
+[node name="MemoryOverlay" type="CanvasLayer"]
+script = ExtResource("1_overlay")
+layer = 11
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -370.0
+offset_top = 24.0
+offset_right = -35.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Slots" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Slot1" type="PanelContainer" parent="MarginContainer/Slots"]
+script = ExtResource("2_paper")
+custom_minimum_size = Vector2(103, 58)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Slots/Slot1"]
+layout_mode = 2
+text = "SLOT 1\nEMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="MarginContainer/Slots"]
+script = ExtResource("2_paper")
+custom_minimum_size = Vector2(103, 58)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Slots/Slot2"]
+layout_mode = 2
+text = "SLOT 2\nEMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="MarginContainer/Slots"]
+script = ExtResource("2_paper")
+custom_minimum_size = Vector2(103, 58)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Slots/Slot3"]
+layout_mode = 2
+text = "SLOT 3\nEMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+

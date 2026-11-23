@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/chamber_exit.tscn" id="1_exit"]
+[ext_resource type="PackedScene" path="res://scenes/world/kill_zone.tscn" id="2_kill"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/pressure_plate.tscn" id="3_plate"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="4_door"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1280, 80)
+
+[sub_resource type="RectangleShape2D" id="StepShape"]
+size = Vector2(120, 32)
+
+[sub_resource type="RectangleShape2D" id="HighShape"]
+size = Vector2(360, 32)
+
+[node name="Chamber05EchoPlatforms" type="Node2D"]
+metadata/hint = "Your echoes are solid. Record a partner, then find the higher route."
+
+[node name="Background" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 720, 0, 720)
+color = Color(0.055, 0.045, 0.12, 1)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="EchoSpawn" type="Marker2D" parent="."]
+position = Vector2(120, 590)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="Visual" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(-640, -40, 640, -40, 640, 40, -640, 40)
+color = Color(0.15, 0.2, 0.31, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("GroundShape")
+
+[node name="EchoStep" type="StaticBody2D" parent="."]
+position = Vector2(520, 540)
+
+[node name="Visual" type="Polygon2D" parent="EchoStep"]
+polygon = PackedVector2Array(-60, -16, 60, -16, 60, 16, -60, 16)
+color = Color(0.39, 0.26, 0.62, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EchoStep"]
+shape = SubResource("StepShape")
+
+[node name="HighRoute" type="StaticBody2D" parent="."]
+position = Vector2(840, 390)
+
+[node name="Visual" type="Polygon2D" parent="HighRoute"]
+polygon = PackedVector2Array(-180, -16, 180, -16, 180, 16, -180, 16)
+color = Color(0.2, 0.3, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HighRoute"]
+shape = SubResource("HighShape")
+
+[node name="Mechanics" type="Node2D" parent="."]
+
+[node name="PlateA" parent="Mechanics" instance=ExtResource("3_plate")]
+position = Vector2(280, 632)
+
+[node name="PlateB" parent="Mechanics" instance=ExtResource("3_plate")]
+position = Vector2(520, 512)
+
+[node name="DoorA" parent="Mechanics" instance=ExtResource("4_door")]
+position = Vector2(760, 560)
+
+[node name="DoorB" parent="Mechanics" instance=ExtResource("4_door")]
+position = Vector2(1010, 560)
+
+[node name="Exit" parent="." instance=ExtResource("1_exit")]
+position = Vector2(1160, 580)
+
+[node name="KillZone" parent="." instance=ExtResource("2_kill")]
+position = Vector2(640, 760)
+scale = Vector2(6, 1)
+
+[connection signal="active_changed" from="Mechanics/PlateA" to="Mechanics/DoorA" method="set_open"]
+[connection signal="active_changed" from="Mechanics/PlateB" to="Mechanics/DoorB" method="set_open"]
